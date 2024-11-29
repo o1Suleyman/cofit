@@ -1,0 +1,12 @@
+.Dark {
+    display: none;
+  }
+   
+  @media (prefers-color-scheme: dark) {
+    .Light {
+      display: none;
+    }
+    .Dark {
+      display: unset;
+    }
+  }
