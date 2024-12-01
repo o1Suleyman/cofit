@@ -35,13 +35,13 @@ export default function RootLayout({
         >
           <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col items-center">
-              <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+              <nav className="w-full flex justify-center border-b border-b-foreground/10 h-20">
                 <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
                   <Logo />
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>
               </nav>
-              <div className="max-w-5xl p-5 w-full">
+              <div className="max-w-5xl p-5 w-full flex-grow">
                 {children}
               </div>
               <footer className="w-full flex items-center justify-center border-t mx-auto text-center gap-8 py-8 mt-auto">
