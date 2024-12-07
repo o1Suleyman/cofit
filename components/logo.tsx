@@ -1,9 +1,11 @@
 'use client';
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
+import { useRouter } from 'next/navigation';
 
 function ThemedImage() {
   const { resolvedTheme } = useTheme()
+  const router = useRouter()
   let src
 
   switch (resolvedTheme) {
@@ -18,7 +20,7 @@ function ThemedImage() {
       break
   }
 
-  return <Image src={src} width={200} height={45} alt="Logo" />
+  return <Image src={src} width={200} height={45} alt="Logo" onClick={() => router.push('/')} className="cursor-pointer" />
 }
 
 export default ThemedImage
