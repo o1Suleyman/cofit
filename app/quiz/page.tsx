@@ -52,7 +52,7 @@ export default function Quiz() {
             }
         }
         redir()
-    }, [])  // Note the corrected dependency array syntax
+    }, [])
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
