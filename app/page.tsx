@@ -8,6 +8,6 @@ export default function Index() {
     <Button asChild>
       <Link href="/quiz">Get started</Link>
     </Button>
-    <Image src="/bg.png" alt="Demo" width={1000} height={1000} />
+    <Image src="/bg.png" alt="Demo" width={1000} height={542} />
   </div>);
 }

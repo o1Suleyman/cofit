@@ -40,6 +40,8 @@ const formSchema = z.object({
   weight: z.coerce.number().max(300, {
     message: "Weight must be less than 200",
   }),
+  goal: z.enum(["lose weight", "gain muscle"]),
+  activitylevel: z.enum(["low", "medium", "high"]),
 })
 
 export default function Quiz() {
@@ -58,11 +60,13 @@ export default function Quiz() {
         resolver: zodResolver(formSchema),
         defaultValues: {
           age: 0,
+          height: 0,
+          weight: 0,
         },
       })
      
       function onSubmit(values: z.infer<typeof formSchema>) {
-        router.replace(`/quiz/result?age=${values.age}&gender=${values.gender}&height=${values.height}&weight=${values.weight}`)
+        console.log(values)
       }
 
   return (
@@ -74,7 +78,7 @@ export default function Quiz() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Gender</FormLabel>
-              <Select onValueChange={field.onChange}>
+              <Select {...field} defaultValue="male">
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue />
@@ -128,6 +132,48 @@ export default function Quiz() {
             </FormItem>
           )}
         ></FormField>
+        <FormField
+          control={form.control}
+          name="goal"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What do you want to achieve?</FormLabel>
+              <Select {...field} defaultValue="lose weight">
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="lose weight">Lose weight</SelectItem>
+                  <SelectItem value="gain muscle">Gain muscle</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="activitylevel"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Activity Level</FormLabel>
+              <Select {...field} defaultValue="low">
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  </FormControl>
+                <SelectContent>
+                  <SelectItem value="low">Low</SelectItem>
+                  <SelectItem value="medium">Medium</SelectItem>
+                  <SelectItem value="high">High</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}/>
         <Button type="submit">Submit</Button>
       </form>
     </Form>
