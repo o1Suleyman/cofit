@@ -67,10 +67,34 @@ export default function Quiz() {
       activitylevel: "low",
     },
   });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("Submitting values:", values);
+  
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (userError || !user) {
+      console.error("Error fetching user:", userError);
+      return;
+    }
+  
+    const { error } = await supabase
+      .from('profiles')
+      .upsert({
+        id: user.id,
+        gender: values.gender,
+        age: values.age,
+        height: values.height,
+        weight: values.weight,
+        goal: values.goal,
+        activitylevel: values.activitylevel,
+      }, { onConflict: 'id' });
+  
+    if (error) {
+      console.error("Supabase error:", error);
+    } else {
+      console.log("Data submitted successfully");
+    }
   }
+  
 
   return (
     <Form {...form}>
