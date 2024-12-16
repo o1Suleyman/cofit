@@ -75,7 +75,6 @@ export default function Quiz() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        {/* Gender */}
         <FormField
           control={form.control}
           name="gender"
@@ -84,7 +83,7 @@ export default function Quiz() {
               <FormLabel>Gender</FormLabel>
               <Select
                 onValueChange={field.onChange}
-                value={field.value || "male"} // Controlled value with fallback
+                value={field.value || "male"}
               >
                 <FormControl>
                   <SelectTrigger>
@@ -101,7 +100,6 @@ export default function Quiz() {
           )}
         />
 
-        {/* Age */}
         <FormField
           control={form.control}
           name="age"
@@ -116,7 +114,6 @@ export default function Quiz() {
           )}
         />
 
-        {/* Height */}
         <FormField
           control={form.control}
           name="height"
@@ -131,7 +128,6 @@ export default function Quiz() {
           )}
         />
 
-        {/* Weight */}
         <FormField
           control={form.control}
           name="weight"
@@ -146,7 +142,6 @@ export default function Quiz() {
           )}
         />
 
-        {/* Goal */}
         <FormField
           control={form.control}
           name="goal"
@@ -172,7 +167,6 @@ export default function Quiz() {
           )}
         />
 
-        {/* Activity Level */}
         <FormField
           control={form.control}
           name="activitylevel"
@@ -199,7 +193,6 @@ export default function Quiz() {
           )}
         />
 
-        {/* Submit Button */}
         <Button type="submit">Submit</Button>
       </form>
     </Form>
