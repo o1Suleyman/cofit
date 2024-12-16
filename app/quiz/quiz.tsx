@@ -27,6 +27,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
 const formSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters long" }),
   age: z
     .coerce.number()
     .min(16, { message: "Age must be at least 16" })
@@ -59,10 +60,11 @@ export default function Quiz() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       age: 0,
       height: 0,
       weight: 0,
-      gender: "male", // Explicit default value
+      gender: "male",
       goal: "lose",
       activitylevel: "low",
     },
@@ -80,6 +82,7 @@ export default function Quiz() {
       .from('profiles')
       .upsert({
         id: user.id,
+        name: values.name,
         gender: values.gender,
         age: values.age,
         height: values.height,
@@ -100,6 +103,15 @@ export default function Quiz() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField control={form.control} name="name" render={({ field }) => (
+          <FormItem>
+            <FormLabel>Name</FormLabel>
+            <FormControl>
+              <Input {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}/>
         <FormField
           control={form.control}
           name="gender"
