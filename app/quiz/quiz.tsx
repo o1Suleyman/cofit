@@ -93,6 +93,7 @@ export default function Quiz() {
     } else {
       console.log("Data submitted successfully");
     }
+    router.push("/dashboard");
   }
   
 
@@ -174,7 +175,7 @@ export default function Quiz() {
               <FormLabel>What do you want to achieve?</FormLabel>
               <Select
                 onValueChange={field.onChange}
-                value={field.value || "gain"} // Controlled value with fallback
+                value={field.value || "gain"}
               >
                 <FormControl>
                   <SelectTrigger>
