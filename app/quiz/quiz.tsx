@@ -38,7 +38,7 @@ const formSchema = z.object({
   weight: z.coerce.number().max(300, {
     message: "Weight must be less than 300",
   }),
-  goal: z.enum(["lose weight", "gain muscle"]),
+  goal: z.enum(["lose", "gain"]),
   activitylevel: z.enum(["low", "medium", "high"]),
 });
 
@@ -63,7 +63,7 @@ export default function Quiz() {
       height: 0,
       weight: 0,
       gender: "male", // Explicit default value
-      goal: "lose weight",
+      goal: "lose",
       activitylevel: "low",
     },
   });
@@ -174,7 +174,7 @@ export default function Quiz() {
               <FormLabel>What do you want to achieve?</FormLabel>
               <Select
                 onValueChange={field.onChange}
-                value={field.value || "lose weight"} // Controlled value with fallback
+                value={field.value || "gain"} // Controlled value with fallback
               >
                 <FormControl>
                   <SelectTrigger>
@@ -182,8 +182,8 @@ export default function Quiz() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="lose weight">Lose weight</SelectItem>
-                  <SelectItem value="gain muscle">Gain muscle</SelectItem>
+                  <SelectItem value="lose">Lose weight</SelectItem>
+                  <SelectItem value="gain">Gain muscle</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
