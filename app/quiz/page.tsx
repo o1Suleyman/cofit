@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { optional, z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,75 +13,82 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import React, { useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { createClient } from "@/utils/supabase/client"
-
+} from "@/components/ui/select";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
 
 const formSchema = z.object({
-  age: z.coerce.number().min(16, {
-    message: "Age must be at least 16",
-  }).max(80, {
-    message: "Age must be less than 80",
-  }),
+  age: z
+    .coerce.number()
+    .min(16, { message: "Age must be at least 16" })
+    .max(80, { message: "Age must be less than 80" }),
   gender: z.enum(["male", "female"]),
   height: z.coerce.number().max(300, {
-    message: "Height must be less than 200",
+    message: "Height must be less than 300",
   }),
   weight: z.coerce.number().max(300, {
-    message: "Weight must be less than 200",
+    message: "Weight must be less than 300",
   }),
   goal: z.enum(["lose weight", "gain muscle"]),
   activitylevel: z.enum(["low", "medium", "high"]),
-})
+});
 
 export default function Quiz() {
-    const supabase = createClient();
-    useEffect(() => {
-        const redir = async () => {
-            const { data, error } = await supabase.auth.getSession()
-            if (data.session === null || error) {
-                router.push("/sign-in")
-            }
-        }
-        redir()
-    }, [])
-    const router = useRouter();
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          age: 0,
-          height: 0,
-          weight: 0,
-        },
-      })
-     
-      function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+  const supabase = createClient();
+  const router = useRouter();
+
+  useEffect(() => {
+    const redir = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (data.session === null || error) {
+        router.push("/sign-in");
       }
+    };
+    redir();
+  }, [router, supabase]);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      age: 0,
+      height: 0,
+      weight: 0,
+      gender: "male", // Explicit default value
+      goal: "lose weight",
+      activitylevel: "low",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-      <FormField
+        {/* Gender */}
+        <FormField
           control={form.control}
           name="gender"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Gender</FormLabel>
-              <Select {...field} defaultValue="male">
+              <Select
+                onValueChange={field.onChange}
+                value={field.value || "male"} // Controlled value with fallback
+              >
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue placeholder="Select gender" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -93,6 +100,8 @@ export default function Quiz() {
             </FormItem>
           )}
         />
+
+        {/* Age */}
         <FormField
           control={form.control}
           name="age"
@@ -106,6 +115,8 @@ export default function Quiz() {
             </FormItem>
           )}
         />
+
+        {/* Height */}
         <FormField
           control={form.control}
           name="height"
@@ -119,6 +130,8 @@ export default function Quiz() {
             </FormItem>
           )}
         />
+
+        {/* Weight */}
         <FormField
           control={form.control}
           name="weight"
@@ -131,17 +144,22 @@ export default function Quiz() {
               <FormMessage />
             </FormItem>
           )}
-        ></FormField>
+        />
+
+        {/* Goal */}
         <FormField
           control={form.control}
           name="goal"
           render={({ field }) => (
             <FormItem>
               <FormLabel>What do you want to achieve?</FormLabel>
-              <Select {...field} defaultValue="lose weight">
+              <Select
+                onValueChange={field.onChange}
+                value={field.value || "lose weight"} // Controlled value with fallback
+              >
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue placeholder="Select goal" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -153,18 +171,23 @@ export default function Quiz() {
             </FormItem>
           )}
         />
+
+        {/* Activity Level */}
         <FormField
           control={form.control}
           name="activitylevel"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Activity Level</FormLabel>
-              <Select {...field} defaultValue="low">
+              <Select
+                onValueChange={field.onChange}
+                value={field.value || "low"} // Controlled value with fallback
+              >
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue placeholder="Select activity level" />
                   </SelectTrigger>
-                  </FormControl>
+                </FormControl>
                 <SelectContent>
                   <SelectItem value="low">Low</SelectItem>
                   <SelectItem value="medium">Medium</SelectItem>
@@ -173,9 +196,12 @@ export default function Quiz() {
               </Select>
               <FormMessage />
             </FormItem>
-          )}/>
+          )}
+        />
+
+        {/* Submit Button */}
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-  )
+  );
 }
