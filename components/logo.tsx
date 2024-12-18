@@ -16,7 +16,6 @@ function ThemedImage() {
       width={200}
       height={45}
       alt="Logo"
-      priority
       onClick={() => router.push('/')}
       className="cursor-pointer transition-opacity duration-300"
     />

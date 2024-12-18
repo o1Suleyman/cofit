@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import CreateWorkout from "./createworkout";
 
 export default async function Workouts() {
     const supabase = await createClient();
@@ -10,12 +11,13 @@ export default async function Workouts() {
     return (
         <div className="space-y-4">
             {data.map((workout) => (
-                <div key={workout.id}>
+                <div key={workout.id} className="rounded border border-gray-300 p-4">
                     <h2>Name - {workout.name}</h2>
                     <p>Description - {workout.description}</p>
                     <p>Gym name - {workout.gym_name}</p>
                 </div>
             ))}
+            <CreateWorkout />
         </div>
     );
 }
