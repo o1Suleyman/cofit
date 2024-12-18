@@ -53,7 +53,18 @@ export default function Quiz() {
         router.push("/sign-in");
       }
     };
+    const redir2 = async () => {
+      const { data, error } = await supabase.from('profiles').select('quizcompleted').single();
+      if (error) {
+        return;
+      }
+      if (data.quizcompleted === true) {
+        router.push("/dashboard");
+      } else {
+        router.push("/quiz");
+      }}
     redir();
+    redir2();
   }, [router, supabase]);
 
   const form = useForm<z.infer<typeof formSchema>>({
