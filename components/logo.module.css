@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+    .logo {
+        display: none;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .logo2 {
+        display: none;
+    }
+}
