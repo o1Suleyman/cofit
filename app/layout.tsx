@@ -8,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
 import Logo from "@/components/logo";
+import NavItem from "@/components/navitem";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -38,6 +39,7 @@ export default function RootLayout({
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-20">
                 <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
                   <Logo />
+                  <NavItem />
                   <HeaderAuth />
                 </div>
               </nav>
