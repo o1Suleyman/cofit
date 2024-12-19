@@ -48,10 +48,10 @@ export const signInAction = async (formData: FormData) => {
     email,
     password,
   });
-  // const { data } = await supabase.from('profiles').select('quizcompleted').single();
-  // if (data && data.quizcompleted === true) {
-  //   return redirect("/dashboard");
-  // }
+  const { data } = await supabase.from('profiles').select('quizcompleted').single();
+  if (data && data.quizcompleted === true) {
+    return redirect("/dashboard");
+  }
   if (error) {
     return encodedRedirect("error", "/sign-in", error.message);
   }

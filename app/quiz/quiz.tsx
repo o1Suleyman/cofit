@@ -54,8 +54,11 @@ export default function Quiz() {
       }
     };
     const redir2 = async () => {
-      const { data } = await supabase.from('profiles').select('quizcompleted').single();
-      if (data && data.quizcompleted === true) {
+      const { data, error } = await supabase.from('profiles').select('quizcompleted').single();
+      if (error) {
+        return;
+      }
+      if (data.quizcompleted === true) {
         router.push("/dashboard");
       } else {
         router.push("/quiz");
