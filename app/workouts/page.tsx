@@ -1,15 +1,4 @@
-import { Button } from "@/components/ui/button"
-import CreateWorkoutDrawer from "@/app/workouts/createworkoutdrawer"
-import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerDescription,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerTrigger,
-  } from "@/components/ui/drawer"
+import CreateWorkoutDrawer from "@/app/workouts/createdrawer"
 import { createClient } from "@/utils/supabase/server"
 import Workout from "./workout";
 export default async function WorkoutsPage() {

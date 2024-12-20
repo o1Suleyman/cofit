@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,7 +15,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { createClient } from "@/utils/supabase/client"
-import { revalidatePath } from "next/cache"
 import { createWorkout } from "./actions"
 
 const formSchema = z.object({
@@ -27,7 +25,6 @@ const formSchema = z.object({
 })
 
 export default function ProfileForm() {
-  const supabase = createClient();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {

@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button"
-import CreateWorkout from "@/app/workouts/createworkout"
+import CreateWorkout from "@/app/workouts/create"
 import {
     Drawer,
-    DrawerClose,
     DrawerContent,
-    DrawerDescription,
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
