@@ -7,8 +7,8 @@ export default async function WorkoutsPage() {
     const { data } = await supabase.from("sessions").select("*");
 
     return (
-        <div className="m-2 flex flex-col">
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 max-h-[75vh] overflow-y-auto">
+        <div className="my-auto flex flex-col">
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 max-h-[75vh] overflow-y-auto min-h-[55vh]">
                 {data?.map((workout: any) => (
                         <Workout
                             id={workout.id}
