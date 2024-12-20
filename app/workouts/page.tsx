@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import CreateWorkout from "@/app/workouts/create/createworkout"
+import CreateWorkoutDrawer from "@/app/workouts/createworkoutdrawer"
 import {
     Drawer,
     DrawerClose,
@@ -10,20 +10,16 @@ import {
     DrawerTitle,
     DrawerTrigger,
   } from "@/components/ui/drawer"
+import { createClient } from "@/utils/supabase/server"
 export default async function WorkoutsPage() {
-    return (
-        <Drawer>
-  <DrawerTrigger>Start a new workout</DrawerTrigger>
-  <DrawerContent>
-    <DrawerHeader>
-      <DrawerTitle>Create a new workout</DrawerTitle>
-      {/* <DrawerDescription></DrawerDescription> */}
-    </DrawerHeader>
-    <DrawerFooter>
-        <CreateWorkout />
-    </DrawerFooter>
-  </DrawerContent>
-</Drawer>
-
-    )
+    const supabase = await createClient();
+    const { data, error } = await supabase.from('sessions').select('*');
+    return (<div className="my-2">
+        {data?.map((workout) => (
+            <div key={workout.id}>
+                <h2>{workout.name}</h2>
+            </div>
+        ))}
+        <CreateWorkoutDrawer />
+        </div>)
 }  
