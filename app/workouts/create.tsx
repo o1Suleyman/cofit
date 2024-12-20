@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { createClient } from "@/utils/supabase/client"
 import { createWorkout } from "./actions"
 
 const formSchema = z.object({
