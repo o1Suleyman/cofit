@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import CreateWorkout from "@/app/workouts/create/createworkout"
+import CreateWorkout from "@/app/workouts/createworkout"
 import {
     Drawer,
     DrawerClose,

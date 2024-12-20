@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { createClient } from "@/utils/supabase/client"
+import { revalidatePath } from "next/cache"
+import { createWorkout } from "./actions"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -33,9 +35,9 @@ export default function ProfileForm() {
         },
       })
       async function onSubmit(values: z.infer<typeof formSchema>) {
-        const { data, error } = await supabase.from("workouts").insert({
-          name: values.name,
-        })
+        const name = values.name;
+        const description = values.description;
+        createWorkout(name, description);
       }
   return (
     <Form {...form}>
