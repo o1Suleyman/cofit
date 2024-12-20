@@ -5,6 +5,7 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
   } from "@/components/ui/resizable"  
+import WorkoutsPage from "../workouts/page";
 
 export default async function DashboardPage() {
     const supabase = await createClient();
@@ -18,9 +19,9 @@ export default async function DashboardPage() {
           className="max-w-screen-lg rounded-lg border md:min-w-[450px] my-auto"
         >
           <ResizablePanel defaultSize={50}>
-            <div className="flex h-[50vh] items-center justify-center p-6">
-              <span className="font-semibold">One</span>
-            </div>
+            {/* <div className="flex items-center justify-center p-6"> */}
+                <WorkoutsPage />
+            {/* </div> */}
           </ResizablePanel>
           <ResizableHandle />
           <ResizablePanel defaultSize={50}>

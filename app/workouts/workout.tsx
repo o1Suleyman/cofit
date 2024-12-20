@@ -9,7 +9,7 @@ import DeleteWorkoutButton from "./deleteworkout";
 import deleteWorkout from "./actions";
 export default async function Workout( {name, description, id}: {name:string, description:string, id:string} ) {
     return (
-        <Card className="m-2">
+        <Card className="">
   <CardHeader>
     <CardTitle>{name}</CardTitle>
     <CardDescription>{description}</CardDescription>
