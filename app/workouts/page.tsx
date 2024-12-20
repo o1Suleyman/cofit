@@ -13,7 +13,7 @@ import {
 export default async function WorkoutsPage() {
     return (
         <Drawer>
-  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerTrigger>Start a new workout</DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>Create a new workout</DrawerTitle>
