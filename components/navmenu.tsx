@@ -14,7 +14,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 
-export default function NavigationMenuDemo() {
+export default function NavMenu() {
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -38,10 +38,10 @@ export default function NavigationMenuDemo() {
                   </Link>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/dashboard/workouts" title="Workouts">
+              <ListItem href="/workouts" title="Workouts">
                 View all your workouts and track your progress.
               </ListItem>
-              <ListItem href="/dashboard/create" title="Create">
+              <ListItem href="/workouts/create" title="Create">
                 Start a new workout.
               </ListItem>
               <ListItem href="/dashboard" title="WIP">

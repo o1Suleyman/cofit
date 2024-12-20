@@ -15,22 +15,27 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { createClient } from "@/utils/supabase/client"
 
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name is too short",
   }),
+  description: z.string(),
 })
 
 export default function ProfileForm() {
+  const supabase = createClient();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
           name: "",
         },
       })
-      function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+      async function onSubmit(values: z.infer<typeof formSchema>) {
+        const { data, error } = await supabase.from("workouts").insert({
+          name: values.name,
+        })
       }
   return (
     <Form {...form}>
@@ -48,6 +53,19 @@ export default function ProfileForm() {
             </FormItem>
           )}
         />
+        <FormField
+        control={form.control}
+        name="description"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Description</FormLabel>
+            <FormControl>
+              <Input {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
         <Button type="submit">Create</Button>
       </form>
     </Form>
