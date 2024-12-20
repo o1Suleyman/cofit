@@ -19,7 +19,7 @@ function ThemedImage() {
       width={200}
       height={45}
       alt="Logo"
-      onClick={() => router.prefetch('/')}
+      onClick={() => router.push('/')}
       className={`${styles.logo} cursor-pointer transition-opacity duration-300`}
     />
     <Image
@@ -27,7 +27,7 @@ function ThemedImage() {
       width={50}
       height={42}
       alt="Logo"
-      onClick={() => router.prefetch('/')}
+      onClick={() => router.push('/')}
       className="cursor-pointer transition-opacity duration-300 md:hidden"
     />
     </>
