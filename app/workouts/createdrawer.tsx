@@ -11,7 +11,7 @@ import {
 export default async function WorkoutsPage() {
     return (
         <Drawer>
-  <DrawerTrigger asChild><Button>Start a new workout</Button></DrawerTrigger>
+  <DrawerTrigger asChild className="min-h-[10vh]"><Button>Start a new workout</Button></DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>Create a new workout</DrawerTitle>
@@ -22,6 +22,5 @@ export default async function WorkoutsPage() {
     </DrawerFooter>
   </DrawerContent>
 </Drawer>
-
     )
 }  

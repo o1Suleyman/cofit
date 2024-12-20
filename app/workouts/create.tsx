@@ -28,6 +28,7 @@ export default function ProfileForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
           name: "",
+          description: "",
         },
       })
       async function onSubmit(values: z.infer<typeof formSchema>) {
