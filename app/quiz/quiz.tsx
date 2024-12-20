@@ -97,7 +97,7 @@ export default function Quiz() {
         goal: values.goal,
         activitylevel: values.activitylevel,
       }, { onConflict: 'id' });
-  
+
     if (error) {
       console.error("Supabase error:", error);
     } else {
@@ -106,7 +106,6 @@ export default function Quiz() {
     router.push("/dashboard");
   }
   
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
