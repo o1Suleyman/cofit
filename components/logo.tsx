@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 import styles from './logo.module.css';
+import { useEffect } from 'react';
 
 function ThemedImage() {
   const { theme, resolvedTheme } = useTheme();
@@ -13,6 +14,9 @@ function ThemedImage() {
   const lightFaviconSrc= '/faviconlight.png';
   const darkFaviconSrc = '/favicondark.png';
   const isDark = resolvedTheme === 'dark' || theme === 'dark';
+  useEffect(() => {
+    router.prefetch('/');
+  })
   return (<>
     <Image
       src={isDark ? darkSrc : lightSrc}
