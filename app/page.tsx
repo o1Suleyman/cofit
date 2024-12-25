@@ -11,7 +11,7 @@ export default async function Index() {
     {/* <h1 className="">Take the quiz and get your personalized results!</h1> */}
     <Image src="/bg2.png" alt="Demo" width={820} height={525}/>
     {!data.user ? <Button asChild>
-      <Link href="/quiz">Get started</Link>
+      <Link href="/sign-up">Get started</Link>
     </Button> : <Button asChild>
       <Link href="/dashboard">Dashboard</Link></Button>}
   </div>);
