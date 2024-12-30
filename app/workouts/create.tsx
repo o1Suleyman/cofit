@@ -14,7 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { createWorkout } from "./actions"
+import { createClient } from "@/utils/supabase/client"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -24,6 +25,7 @@ const formSchema = z.object({
 })
 
 export default function ProfileForm() {
+  const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -32,9 +34,12 @@ export default function ProfileForm() {
         },
       })
       async function onSubmit(values: z.infer<typeof formSchema>) {
-        const name = values.name;
-        const description = values.description;
-        createWorkout(name, description);
+        const supabase = await createClient();
+        await supabase.from('sessions').insert({
+            name: values.name,
+            description: values.description,
+        });
+        router.refresh();
       }
   return (
     <Form {...form}>
